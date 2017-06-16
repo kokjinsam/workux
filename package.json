@@ -1,0 +1,40 @@
+{
+  "name": "workux",
+  "version": "0.2.0",
+  "description": "Use Redux in Web Worker",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Kok Sam <samkj.ks@gmail.com>",
+  "homepage": "https://github.com/sammkj/workux",
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "./node_modules/.bin/rimraf lib",
+    "compile": "./node_modules/.bin/tsc"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sammkj/workux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sammkj/workux/issues"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.66",
+    "promise-worker": "^1.1.1"
+  },
+  "peerDependencies": {
+    "lodash": "^4.17.4",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "redux": "3.6.0",
+    "rimraf": "2.6.1",
+    "typescript": "2.4.0"
+  }
+}
