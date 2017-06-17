@@ -1,15 +1,15 @@
 import React from "react";
-import { Provider as ReduxProvider } from "react-redux";
+import { ApolloProvider } from "react-apollo";
 import App from "./components/app";
 
 export default class AppContainer extends React.Component {
   render() {
-    const { reduxStore } = this.props;
+    const { reduxStore, apolloClient } = this.props;
 
     return (
-      <ReduxProvider store={reduxStore}>
+      <ApolloProvider store={reduxStore} client={apolloClient}>
         <App />
-      </ReduxProvider>
+      </ApolloProvider>
     )
   }
 }

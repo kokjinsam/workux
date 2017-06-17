@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
+import apolloMiddleware from "../../shared/services/apollo";
 import rootReducer from "./reducers";
 
 export default function getStore() {

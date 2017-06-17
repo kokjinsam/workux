@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { AppContainer as HotLoaderContainer } from "react-hot-loader";
 import { createProxyStore } from "workux";
 import ReduxWorker from "worker-loader!../workers/redux";
+import { apolloClient } from "../shared/services/apollo";
 import AppContainer from "./app-container";
 
 const worker = new ReduxWorker();
@@ -14,7 +15,10 @@ reduxProxyStore.ready(() => {
 
   ReactDOM.render(
     <HotLoaderContainer>
-      <AppContainer reduxStore={reduxProxyStore} />
+      <AppContainer
+        reduxStore={reduxProxyStore}
+        apolloClient={apolloClient}
+      />
     </HotLoaderContainer>,
     reactNode
   );
@@ -29,7 +33,10 @@ reduxProxyStore.ready(() => {
 
       ReactDOM.render(
         <HotLoaderContainer>
-          <NextAppContainer reduxStore={reduxProxyStore} />
+          <NextAppContainer
+            reduxStore={reduxProxyStore}
+            apolloClient={apolloClient}
+          />
         </HotLoaderContainer>,
         reactNode
       );
