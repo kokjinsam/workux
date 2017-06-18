@@ -8,40 +8,34 @@ const App = ({
   count,
   incrementCount,
   decrementCount,
-  data: {
-    loading,
-    pokemon,
-  }
-}) => (
+  data: { loading, pokemon },
+}) =>
   <div>
     <h1>Count {count}</h1>
     <button onClick={incrementCount}>increment</button>
     <button onClick={decrementCount}>decrement</button>
     <h1>Pokemon</h1>
     {loading && <span>loading</span>}
-    {
-      pokemon &&
+    {pokemon &&
       <ul>
         <li>name: {pokemon.name}</li>
         <li>id: {pokemon.id}</li>
         <li>attack: {pokemon.attack}</li>
         <li>catch rate: {pokemon.catch_rate}</li>
-      </ul>
-    }
-  </div>
-);
+      </ul>}
+  </div>;
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   count: state.counter.count,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   incrementCount: () => {
     dispatch(increment());
   },
   decrementCount: () => {
     dispatch(decrement());
-  }
+  },
 });
 
 const pokemon = gql`
@@ -55,4 +49,6 @@ const pokemon = gql`
   }
 `;
 
-export default graphql(pokemon)(connect(mapStateToProps, mapDispatchToProps)(App));
+export default graphql(pokemon)(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+);

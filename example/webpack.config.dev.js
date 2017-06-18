@@ -42,10 +42,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: /source/,
-        use: [
-          { loader: "babel-loader" },
-        ],
+        use: [{ loader: "babel-loader" }],
       },
     ],
-  }
+  },
 };

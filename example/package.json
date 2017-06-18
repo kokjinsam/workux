@@ -33,13 +33,14 @@
     "react-apollo": "^1.4.2",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-actions": "2.0.3",
     "redux-saga": "0.15.3",
     "rimraf": "^2.6.1",
     "webpack": "^2.6.1",
     "worker-loader": "^0.8.0",
-    "workux": "^0.2.0"
+    "workux": "file:../"
   },
   "devDependencies": {
     "http-server": "^0.10.0",

@@ -741,7 +741,7 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@6.23.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
   dependencies:
@@ -3600,9 +3600,8 @@ worker-loader@^0.8.0:
   dependencies:
     loader-utils "^1.0.2"
 
-workux@^0.2.0:
+"workux@file:../":
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/workux/-/workux-0.2.0.tgz#b85e0d93da803a13adc9b40aa660d5acdf3e11a7"
   dependencies:
     "@types/lodash" "^4.14.66"
     promise-worker "^1.1.1"

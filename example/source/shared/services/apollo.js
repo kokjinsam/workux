@@ -15,4 +15,4 @@ export {
   client as apolloClient,
   middleware as apolloMiddleware,
   reducer as apolloReducer,
-}
+};

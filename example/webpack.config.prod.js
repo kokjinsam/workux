@@ -6,9 +6,7 @@ module.exports = {
   devtool: "source-map",
   target: "web",
   entry: {
-    main: [
-      path.join(__dirname, "./source/main/index.js"),
-    ],
+    main: [path.join(__dirname, "./source/main/index.js")],
   },
   output: {
     filename: "[name].bundle.js",
@@ -66,10 +64,8 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: /source/,
-        use: [
-          { loader: "babel-loader" },
-        ],
+        use: [{ loader: "babel-loader" }],
       },
     ],
-  }
+  },
 };
