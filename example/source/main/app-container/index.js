@@ -20,6 +20,12 @@ export default class AppContainer extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    const { reduxStore } = this.props;
+
+    reduxStore.destory();
+  }
+
   render() {
     const { reduxStore, apolloClient } = this.props;
     const { ready } = this.state;

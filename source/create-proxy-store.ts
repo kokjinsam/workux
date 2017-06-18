@@ -76,20 +76,18 @@ export default function createProxyStore<S>(
       throw new Error("Reducers may not dispatch actions.");
     }
 
-    try {
-      isDispatching = true;
+    isDispatching = true;
 
-      promiseWorker
-        .postMessage(action)
-        .then((response: S) => {
-          _replaceState(response);
-        })
-        .catch(() => {
-          //? Do nothing?
-        });
-    } finally {
-      isDispatching = false;
-    }
+    promiseWorker
+      .postMessage(action)
+      .then((response: S) => {
+        isDispatching = false;
+
+        _replaceState(response);
+      })
+      .catch(() => {
+        //? Do nothing?
+      });
 
     return action;
   }

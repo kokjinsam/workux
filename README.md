@@ -70,7 +70,7 @@ const proxyEnhancer = applyProxyMiddleware(...middleware);
 
 ### `createProxyStore`
 
-Similar to Redux store. This proxy store listens Redux worker store for updates and dispatches actions. 
+Similar to Redux store. This proxy store listens to redux store in worker for updates and dispatches actions accordingly. 
 
 #### Usage
 
@@ -92,7 +92,7 @@ reduxProxyStore.ready(() => {
 
 ### `createWorkerStore`
 
-Listens to actual store changes and update proxy store accordingly. It also listens to action dispatches from proxy store and dispatches actions to actual store.
+Listens to redux store changes and update proxy store accordingly. It also listens to action dispatches from proxy store and dispatches actions to actual store.
 
 #### Usage
 
@@ -112,6 +112,11 @@ const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 createWorkerStore(store);
 ```
+
+## Notes
+
+1. Starting the app will take some time. The browser has to download the worker script and wait for web worker to startup, etc..
+2. If you're creating an enhancer to Redux that requires DOM APIs, History APIs, please make sure to see [`applyProxyMiddleware`](./source/apply-proxy-middleware) to create a proxy enhancer.
 
 ## License
 

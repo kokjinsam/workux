@@ -1,6 +1,6 @@
 {
   "name": "workux",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Use Redux in Web Worker",
   "license": "MIT",
   "main": "lib/index.js",
@@ -33,6 +33,8 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "@types/jest": "20.0.0",
+    "jest": "20.0.4",
     "redux": "3.6.0",
     "rimraf": "2.6.1",
     "typescript": "2.4.0"
