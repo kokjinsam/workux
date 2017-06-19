@@ -57,7 +57,7 @@ export default function createProxyStore<S>(
     return unsubscribe;
   }
 
-  function dispatch(action: Action) {
+  async function dispatch(action: Action) {
     if (!isPlainObject(action)) {
       throw new Error(
         "Actions must be plain objects. " +
@@ -76,20 +76,17 @@ export default function createProxyStore<S>(
       throw new Error("Reducers may not dispatch actions.");
     }
 
-    isDispatching = true;
+    try {
+      isDispatching = true;
 
-    promiseWorker
-      .postMessage(action)
-      .then((response: S) => {
-        isDispatching = false;
+      const updatedState = await promiseWorker.postMessage<S>(action);
 
-        _replaceState(response);
-      })
-      .catch(() => {
-        //? Do nothing?
-      });
+      _replaceState(updatedState);
 
-    return action;
+      return action;
+    } finally {
+      isDispatching = false;
+    }
   }
 
   function destroy() {

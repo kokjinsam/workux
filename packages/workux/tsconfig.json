@@ -14,7 +14,7 @@
       "lodash"
     ],
     "typeRoots": [
-      "node_modules/@types/",
+      "../../node_modules/@types/",
       "source/typings/"
     ],
     "declaration": true,
