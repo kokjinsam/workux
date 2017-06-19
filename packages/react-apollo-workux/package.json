@@ -1,0 +1,25 @@
+{
+  "name": "react-apollo-workux",
+  "version": "0.0.0",
+  "description": "Use Apollo GraphQL with Workux",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Kok Sam <samkj.ks@gmail.com>",
+  "homepage": "https://github.com/sammkj/workux",
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sammkj/workux.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sammkj/workux/issues"
+  },
+  "dependencies": {
+    "apollo-client": "^1.4.2"
+  }
+}
