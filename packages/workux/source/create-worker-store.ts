@@ -1,7 +1,5 @@
-// tslint:disable-next-line: no-require-imports
-import registerPromiseWorker = require("promise-worker/register");
 import { Store } from "redux";
-import { UPDATE_STATE } from "./types";
+import { RECEIVE_MESSAGE, UPDATE_STATE } from "./types";
 
 export default function createStore<S>(store: Store<S>): Store<S> {
   if (store === undefined) {
@@ -28,14 +26,10 @@ export default function createStore<S>(store: Store<S>): Store<S> {
     });
   });
 
-  registerPromiseWorker((event: MessageEvent) => {
-    const action = event;
+  addEventListener(RECEIVE_MESSAGE, (event: MessageEvent) => {
+    const action = event.data;
 
     store.dispatch(action);
-
-    // return store state so that proxy can
-    // update right after the dispatch
-    return store.getState();
   });
 
   return store;
