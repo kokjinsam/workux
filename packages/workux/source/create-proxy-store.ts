@@ -1,6 +1,5 @@
 import { isPlainObject } from "lodash";
-// tslint:disable-next-line: no-require-imports
-import PromiseWorker = require("promise-worker");
+import PromiseWorker = require("promise-worker"); // tslint:disable-next-line: no-require-imports
 import { Action } from "redux";
 import {
   INIT,
@@ -76,17 +75,18 @@ export default function createProxyStore<S>(
       throw new Error("Reducers may not dispatch actions.");
     }
 
-    try {
-      isDispatching = true;
+    isDispatching = true;
 
-      const updatedState = await promiseWorker.postMessage<S>(action);
+    return promiseWorker.postMessage<S>(action).then(updatedState => {
+      isDispatching = false;
 
+      // callbacks....callbacks....
+      // we don't want to wait for worker callback
+      // to update proxy store to avoid mismatch
       _replaceState(updatedState);
 
       return action;
-    } finally {
-      isDispatching = false;
-    }
+    });
   }
 
   function destroy() {
@@ -101,6 +101,9 @@ export default function createProxyStore<S>(
   function start() {
     worker.addEventListener(RECEIVE_MESSAGE, _handleReceiveMessageFromWorker);
 
+    // When a store is created, an "INIT" action is dispatched so that every
+    // reducer returns their initial state. This effectively populates
+    // the initial state tree.
     dispatch({ type: INIT });
   }
 
@@ -121,7 +124,22 @@ export default function createProxyStore<S>(
   function _handleReceiveMessageFromWorker(event: MessageEvent) {
     const action = event.data;
     if (action.type === UPDATE_STATE) {
-      _replaceState(action.payload.state);
+      // A safety precaution to make sure
+      // that the next dispatched action is not blocked.
+      // Since we will be receiving new state,
+      // we can assume that it's safe to dispatch
+      // next action.
+      isDispatching = false;
+
+      const nextState = action.payload.state;
+
+      //! FIXME: UPDATE_STATE will be trigged when
+      //! redux store is updated through `dispatch`
+      //! or a side-effect like redux-saga.
+      //! As noted above, `dispatch` already `_replaceState`
+      //! after it dispatches an action. So here, we're
+      //! `_replaceState`-ing again after a dispatch.
+      _replaceState(nextState);
 
       if (!readyResolved) {
         readyResolved = true;
